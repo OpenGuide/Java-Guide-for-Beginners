@@ -1,0 +1,72 @@
+import java.util.Scanner;
+import java.util.Comparator;
+import java.util.Arrays;
+public class sorting
+{
+	/**
+	* This makes use of the Generic Sorting method provided in JAVA
+	* This sorts the given array of any type.
+	* The comparator class object specifies how the sorting is to be done.
+	*/
+    public static void main(String[] args) throws Exception
+    {
+        int i, size;
+        Scanner Sc = new Scanner(System.in);
+        size = Sc.nextInt();
+        req_data[] arr = new req_data[size];
+        for (i = 0; i < size; ++i) {
+            arr[i] = new req_data();
+            arr[i].set_name (Sc.next());
+            arr[i].set_val (Sc.nextInt());
+        }
+        Arrays.sort (arr, 0, size, new myComp());
+        for (i = 0; i < size; ++i) {
+            System.out.println(arr[i].get_name() + " " + arr[i].get_val());
+        }
+    }
+}
+class req_data
+{
+    private String name;
+    private int val;
+    public void set_name (String name)
+    {
+        this.name = name;
+    }
+    public void set_val (int val)
+    {
+        this.val = val;
+    }
+    public String get_name()
+    {
+        return name;
+    }
+    public int get_val()
+    {
+        return val;
+    }
+}
+class myComp implements Comparator <req_data>
+{
+    /**
+     * Sorting is done by val (increasing),
+     * then by name (decreasing)
+     */
+    public int compare(req_data obj0, req_data obj1)
+    {
+        if (obj0.get_val() > obj1.get_val()) {
+            return 1;
+        } else if (obj0.get_val() == obj1.get_val()) {
+            int c = obj0.get_name().compareTo (obj1.get_name());
+            if (c < 0) {
+                return 1;
+            } else if (c == 0) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    }
+}
